@@ -16,3 +16,15 @@ This project analyzes global population data from 1970 to 2022 to uncover trends
 
 ---
 
+---
+
+## Visualization
+- **Image**:
+- **Link**:(https://app.powerbi.com/view?r=eyJrIjoiMDk1YWM1NGUtMTQ0Yy00OTNjLWIxNjgtYThlNDA2YzExMWExIiwidCI6IjA4NjdkMjY1LWY2YmYtNGYxYi1iOTRkLTZkMzBkZGZiNTk1NCJ9) (Replace with the actual source or link to the dataset)
+- **Columns Included**: Country, Continent, Year, Population, Land Area (km²), Population Density (per km²), etc.
+
+---
+
+## Tools and Technologies
+- **Programming Language**: SQL
+- **Visualization tool**: Power BI
