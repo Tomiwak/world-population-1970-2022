@@ -42,17 +42,21 @@ alter table wp1
 rename column `World Population Percentage` to `World_Population_Percentage`;
 
 -- INSIGHTS
-# 1. What is the total number of countries in each continent?
+-- 1. Total Number of Countries in Each Continent
+-- This query counts the number of countries in each continent.
 select Continent, count(*) number_of_countries
 from wp1
 group by Continent
 order by number_of_countries desc;
-# 2.  what is the top 10 most densely populated countries in 2022?
+-- 2. Top 10 Most Densely Populated Countries in 2022
+-- This query calculates population density
 select Country, Density
 from wp1
 order by Density
 limit 10;
-# 3. what are the countries with the largest population in each continent in 2022?
+-- 3. Countries with the Largest Population in Each Continent in 2022
+-- This query uses a window function to rank countries by population within each continent
+-- and selects the top-ranked country for each continent.
 with CTE(Country,Continent,Population,rank_cont) as
 (select Country,Continent, 2022_Population,
 rank() over(partition by Continent order by 2022_Population desc) rank_cont
@@ -61,12 +65,15 @@ select Country,Continent,Population
 from CTE
 where rank_cont = 1
 order by Population desc;
-# 4. What continent has the largest land area?
+-- 4. Continent with the Largest Land Area
+-- This query sums the land area for each continent and identifies the continent with the largest total land area.
 select Continent, sum(Area) land_area
 from wp1
 group by Continent
 order by land_area desc;
-# 5. Countries with population above the global average in 2022
+-- 5. Countries with Population Above the Global Average in 2022
+-- This query first calculates the global average population for 2022,
+-- then selects countries with a population greater than this average.
 select Country, 2022_Population,round((
 select avg(2022_Population)
 from wp1
@@ -76,11 +83,13 @@ where 2022_Population > (
 select avg(2022_Population)
 from wp1
 );
-# 6. what are the top 10 most populated country?
+-- 6. Top 10 Most Populated Countries in 2022
+-- This query retrieves the top 10 countries with the highest population in 2022.
 select Country, 2022_Population
 from wp1
 order by 2 desc;
-# 7. Countries that had a population decline between 2020 and 2022
+-- 7. Countries with Population Decline Between 2020 and 2022
+-- This query identifies countries where the population in 2022 is less than the population in 2020.
 select Country, 2022_Population, 2020_Population
 from wp1
 where 2022_Population < 2020_Population
